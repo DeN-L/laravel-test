@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -22,6 +23,17 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        // Insert
+        DB::table('users')->insert(
+            array(
+                'name' => 'Jack Doe',
+                'email' => 'jack-doe@milo.ru',
+                'password' => '1111',
+                'created_at' => '2020-05-09 10:00:00',
+                'updated_at' => '2020-05-09 10:00:00'
+            )
+        );
     }
 
     /**
