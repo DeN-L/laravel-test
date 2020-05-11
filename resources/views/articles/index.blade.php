@@ -5,6 +5,12 @@
 @section('content')
     <a href="{{ route('articles.create') }}" class="btn btn-success">Create Article</a>
 
+    @if(session()->get('success'))
+        <div class="alert alert-success mt-3">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
     <table class="table table-striped mt-3">
         <thead>
         <tr>
@@ -20,11 +26,10 @@
         @foreach($articles as $article)
         <tr>
             <th scope="row">{{ $article->id }}</th>
-            <td>{{ $article->user_id }}</td>
+            <td>{{ App\User::find($article->user_id)->name }}</td>
             <td>{{ $article->title }}</td>
             <td>{{ $article->content }}</td>
-            <td>{{ $article->is_publish }}</td>
-            <td>@mdo</td>
+            <td>{{ $article->is_publish ? 'Yes' : 'No' }}</td>
             <td class="table-buttons">
                 <a href="{{ route('articles.show', $article) }}" class="btn btn-success">
                     <i class="fa fa-eye"></i>
@@ -32,9 +37,9 @@
                 <a href="{{ route('articles.edit', $article) }}" class="btn btn-primary">
                     <i class="fa fa-pencil" ></i>
                 </a>
-                <form method="POST" action="{{--{{ route('posts.destroy', $post) }}--}}">
-{{--                    @csrf--}}
-{{--                    @method('DELETE')--}}
+                <form method="POST" action="{{ route('articles.destroy', $article) }}">
+                    @csrf
+                    @method('DELETE')
                     <button type="submit" class="btn btn-danger">
                         <i class="fa fa-trash"></i>
                     </button>

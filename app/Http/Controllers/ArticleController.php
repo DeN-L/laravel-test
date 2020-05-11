@@ -37,51 +37,89 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id'=> 'required|integer|gt:0|min:1|not_in:0|exists:users,id',
+            'title'=> 'required|max:255',
+            'content'=> 'required|max:255',
+            'is_publish'=> 'boolean'
+        ]);
+
+        $article = new Article([
+            'user_id' => $request->get('user_id'),
+            'title' => $request->get('title'),
+            'content' => $request->get('content'),
+            'is_publish' => $request->get('is_publish') ? true : false,
+        ]);
+
+        $article->save();
+
+        return redirect('/articles')->with('success', 'Article crated successful!');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Article  $article
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        //
+        $article = Article::find($id);
+
+        return view('articles.show', compact('article'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Article  $article
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit($id)
     {
-        //
+        $article = Article::find($id);
+
+        return view('articles.edit', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Article  $article
+     * @param  \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'user_id'=> 'required|integer|gt:0|min:1|not_in:0|exists:users,id',
+            'title'=> 'required|max:255',
+            'content'=> 'required|max:255',
+            'is_publish'=> 'boolean'
+        ]);
+
+        $article = Article::find($id);
+        $article->user_id = $request->get('user_id');
+        $article->title = $request->get('title');
+        $article->content = $request->get('content');
+        $article->is_publish = $request->get('is_publish') ? true : false;
+        $article->save();
+
+        return redirect('/articles')->with('success', 'Article updated successful!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Article  $article
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+
+        return redirect('/articles')->with('success', 'Article deleted!');
     }
 }

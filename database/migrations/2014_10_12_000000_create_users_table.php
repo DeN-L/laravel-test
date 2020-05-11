@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             array(
                 'name' => 'Jack Doe',
                 'email' => 'jack-doe@milo.ru',
-                'password' => '1111',
+                'password' => '$2y$10$CKk6g2KXP88eunuzBW3MJuOf82JROMHy1ubXWPwVA6Y9csUjCLbem', // 11111111
                 'created_at' => '2020-05-09 10:00:00',
                 'updated_at' => '2020-05-09 10:00:00'
             )
