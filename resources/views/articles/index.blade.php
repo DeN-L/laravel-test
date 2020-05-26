@@ -26,7 +26,7 @@
         @foreach($articles as $article)
         <tr>
             <th scope="row">{{ $article->id }}</th>
-            <td>{{ App\User::find($article->user_id)->name }}</td>
+            <td>{{ $article->user->name }}</td>
             <td>{{ $article->title }}</td>
             <td>{{ $article->content }}</td>
             <td>{{ $article->is_publish ? 'Yes' : 'No' }}</td>
