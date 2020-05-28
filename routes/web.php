@@ -23,3 +23,8 @@ Route::group(['middleware' => 'is_admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route to static view
+Route::get('/time', function () {
+    return view('time/index');
+})->name('time');
