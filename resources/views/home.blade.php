@@ -4,6 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if(session()->get('error'))
+                <div class="alert alert-danger mt-3">
+                    {{ session()->get('error') }}
+                </div>
+            @else
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -17,6 +22,7 @@
                     You are logged in!
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

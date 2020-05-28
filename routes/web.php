@@ -15,7 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('articles', 'ArticleController');
+Route::group(['middleware' => 'is_admin'], function () {
+    Route::resource('articles', 'ArticleController');
+});
+
 
 Auth::routes();
 
