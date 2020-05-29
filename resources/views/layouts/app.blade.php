@@ -26,6 +26,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('time') }}">Time</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="jobs">Jobs</a>
+                </li>
             </ul>
         </div>
     </div>
