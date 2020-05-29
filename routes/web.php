@@ -28,3 +28,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/time', function () {
     return view('time/index');
 })->name('time');
+
+Route::get('jobs', function () {
+    App\Jobs\SendMessage::dispatch('TEST MESSAGE');
+
+    /*// Job with delay
+    App\Jobs\SendMessage::dispatch('TEST MESSAGE')->delay(now()->addMinutes(10));*/
+
+    /*// Chain of jobs
+    App\Jobs\SendMessage::withChain([
+        new  App\Jobs\SecondMessage('Second job'),
+        new  App\Jobs\ThirdMessage('Third job'),
+    ])->dispatch('First job');*/
+});
